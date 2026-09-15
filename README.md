@@ -9,14 +9,8 @@
 [![Vite](https://img.shields.io/badge/Bundler-Vite-purple.svg)](#technology-stack)
 [![React](https://img.shields.io/badge/Frontend-React%2018-blue.svg)](#technology-stack)
 [![Express](https://img.shields.io/badge/Backend-Express.js-green.svg)](#technology-stack)
-[![MongoDB](https://img.shields.io/badge/Database-MongoDB%20Atlas-brightgreen.svg)](#technology-stack)
-[![Deployed on Vercel](https://img.shields.io/badge/Hosted%20On-Vercel-black?logo=vercel)](https://flavorfeed-interactive-recipe-social-network.vercel.app)
+[![MongoDB](https://img.shields.io/badge/Database-MongoDB%20%2F%20Mongoose-brightgreen.svg)](#technology-stack)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](#license)
-
-### 🌐 Live Production URL (Available 24/7)
-**Live Web Application:** [https://flavorfeed-interactive-recipe-social-network.vercel.app](https://flavorfeed-interactive-recipe-social-network.vercel.app)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgajinduyashmika%2FFlavorFeed-Interactive-Recipe-Social-Network&branch=dev)
 
 ---
 
@@ -341,28 +335,6 @@ npm run test:e2e
 ✅ 11. Profile & Cookbooks: User has 4 authored recipes and 1 saved in cookbook
 
 🎉 ALL 11 END-TO-END CRITICAL FLOWS VERIFIED SUCCESSFULLY!
-```
-
----
-
-## ☁️ Cloud Deployment on Vercel
-
-FlavorFeed is architected with **Zero-Config Serverless Deployment** on Vercel:
-
-1. **Frontend**: Vite compiles into `frontend/dist`, cached globally across Vercel Edge Network.
-2. **Backend**: Express REST API runs as a serverless function via `api/index.js` rewriting all `/api/*` requests.
-3. **Database**: Connected directly to persistent **MongoDB Atlas** (`cluster0.4zl9uw0.mongodb.net`) with connection pooling.
-
-### 1-Click Deploy to Vercel:
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgajinduyashmika%2FFlavorFeed-Interactive-Recipe-Social-Network&branch=dev)
-
-### Manual Vercel Deployment via CLI:
-```bash
-# Deploy to preview
-vercel
-
-# Deploy to production
-vercel --prod
 ```
 
 ---
