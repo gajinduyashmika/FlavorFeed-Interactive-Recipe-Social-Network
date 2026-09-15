@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🍳 FlavorFeed — Interactive Recipe Social Network
+# 🍳 FlavorFeed - Interactive Recipe Social Network
 
 > A modern, high-performance Single Page Application (SPA) built for culinary enthusiasts, home cooks, and artisan bakers to discover authentic recipes, scale servings dynamically, cook with live step timers, and build personal digital cookbooks.
 
