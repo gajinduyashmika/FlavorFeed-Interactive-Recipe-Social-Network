@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "mongodb+srv://gajinduyashmika5_db_user:lj3PQoDbspAup8Lt@cluster0.4zl9uw0.mongodb.net/flavorfeed?appName=Cluster0",
+    "JWT_SECRET": "flavorfeed_super_secret_jwt_key_2026_recipe_network",
+    "NODE_ENV": "production"
+  }
+}
