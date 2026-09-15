@@ -1,0 +1,16 @@
+{
+  "name": "flavorfeed-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FlavorFeed - Interactive Recipe Social Network",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "seed": "cd backend && node seed/seedData.js",
+    "test:e2e": "cd backend && node test_e2e.js"
+  },
+  "keywords": ["recipe", "social-network", "mern", "foodies"],
+  "author": "FlavorFeed Team",
+  "license": "MIT"
+}
