@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
-import { UtensilsCrossed, PlusCircle, LogOut, User as UserIcon, Bookmark, Flame } from 'lucide-react';
+import { PlusCircle, LogOut, User as UserIcon, Bookmark, Flame, Menu, X } from 'lucide-react';
 
 export const Navbar = () => {
   const { user, logout } = useAuth();
   const toast = useToast();
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -28,13 +29,22 @@ export const Navbar = () => {
         </Link>
 
         {/* Center Nav Links */}
-        <nav className="nav-links">
-          <Link to="/" className="nav-link">Explore</Link>
-          <Link to="/create-recipe" className="nav-link highlight">
+        <nav className={`nav-links ${mobileNavOpen ? 'mobile-open' : ''}`}>
+          <Link to="/" className="nav-link" onClick={() => setMobileNavOpen(false)}>Explore</Link>
+          <Link to="/create-recipe" className="nav-link highlight" onClick={() => setMobileNavOpen(false)}>
             <PlusCircle size={18} />
             <span>Share Recipe</span>
           </Link>
         </nav>
+
+        <button
+          className="mobile-nav-toggle"
+          onClick={() => setMobileNavOpen((open) => !open)}
+          aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileNavOpen}
+        >
+          {mobileNavOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
 
         {/* Right Auth / Profile */}
         <div className="nav-auth">
@@ -124,6 +134,18 @@ export const Navbar = () => {
           display: flex;
           align-items: center;
           gap: 1.5rem;
+        }
+        .mobile-nav-toggle {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: var(--radius-md);
+          background: var(--bg-hover);
+          border: 1px solid var(--border-subtle);
+          color: var(--text-primary);
+          cursor: pointer;
         }
         .nav-link {
           color: var(--text-secondary);
@@ -237,6 +259,51 @@ export const Navbar = () => {
         .logout-btn:hover {
           color: var(--accent-red);
           background: rgba(239, 68, 68, 0.1);
+        }
+        @media (max-width: 720px) {
+          .navbar-inner {
+            position: relative;
+          }
+          .mobile-nav-toggle {
+            display: flex;
+            margin-left: auto;
+            margin-right: 0.5rem;
+          }
+          .nav-links {
+            position: absolute;
+            top: calc(100% + 1px);
+            left: 1rem;
+            right: 1rem;
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.35rem;
+            padding: 0.6rem;
+            background: rgba(20, 25, 32, 0.98);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            box-shadow: var(--shadow-lg);
+          }
+          .nav-links.mobile-open {
+            display: flex;
+            animation: dropIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .nav-link {
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+          }
+          .nav-link:hover {
+            background: var(--bg-hover);
+          }
+          .navbar-user-name {
+            display: none;
+          }
+          .profile-btn {
+            padding-right: 0.35rem;
+          }
+          .auth-buttons .btn-secondary {
+            display: none;
+          }
         }
       `}</style>
     </header>

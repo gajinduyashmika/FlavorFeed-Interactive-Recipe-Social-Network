@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Play, Pause, RotateCcw, Award, CheckCircle } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Play, Pause, RotateCcw, Award, CheckCircle, Zap } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const CookModeModal = ({ isOpen, onClose, recipeTitle, instructions = [] }) => {
@@ -30,7 +30,25 @@ export const CookModeModal = ({ isOpen, onClose, recipeTitle, instructions = [] 
       }, 1000);
     } else if (timerSeconds === 0 && isTimerRunning) {
       setIsTimerRunning(false);
-      // Play a subtle notification vibration / beep if available
+      // Play a gentle culinary chime via Web Audio API
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.2); // A5
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.8);
+      } catch {
+        // AudioContext not allowed or not supported
+      }
+
       if ('vibrate' in navigator) navigator.vibrate([200, 100, 200]);
     }
     return () => clearInterval(interval);
@@ -73,7 +91,7 @@ export const CookModeModal = ({ isOpen, onClose, recipeTitle, instructions = [] 
         {/* Top Header */}
         <div className="cook-mode-header flex-between">
           <div className="cook-header-title">
-            <span className="cook-mode-badge">⚡ Cook Mode Active</span>
+            <span className="cook-mode-badge"><Zap size={13} /> Cook Mode Active</span>
             <h2>{recipeTitle}</h2>
           </div>
           <button onClick={onClose} className="close-btn" aria-label="Close Cook Mode">
@@ -154,7 +172,7 @@ export const CookModeModal = ({ isOpen, onClose, recipeTitle, instructions = [] 
             </button>
 
             <button onClick={handleNext} className="btn btn-primary">
-              <span>{currentStepIdx === totalSteps - 1 ? 'Finish Dish 🎉' : 'Next Step'}</span>
+              <span>{currentStepIdx === totalSteps - 1 ? 'Finish Dish' : 'Next Step'}</span>
               <ChevronRight size={18} />
             </button>
           </div>

@@ -51,9 +51,9 @@ export const RecipeFilter = ({
               className="filter-select"
               aria-label="Sort recipes"
             >
-              <option value="newest">✨ Newest First</option>
-              <option value="popular">🔥 Most Popular</option>
-              <option value="fastest">⚡ Fastest Cook</option>
+              <option value="newest">Newest First</option>
+              <option value="popular">Most Popular</option>
+              <option value="fastest">Fastest Cook</option>
             </select>
           </div>
 
@@ -65,9 +65,9 @@ export const RecipeFilter = ({
               aria-label="Filter by difficulty"
             >
               <option value="All">All Skill Levels</option>
-              <option value="Easy">🌱 Easy</option>
-              <option value="Medium">🍳 Medium</option>
-              <option value="Hard">🔥 Master Chef</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Master Chef</option>
             </select>
           </div>
         </div>
