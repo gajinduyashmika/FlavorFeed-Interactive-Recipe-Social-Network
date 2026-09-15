@@ -35,6 +35,7 @@ export const RecipeDetailPage = () => {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [saved, setSaved] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -116,9 +117,9 @@ export const RecipeDetailPage = () => {
   };
 
   const handleShare = () => {
+    setShareModalOpen(true);
     if (navigator.clipboard) {
       navigator.clipboard.writeText(window.location.href);
-      toast.success('Recipe link copied to clipboard!');
     }
   };
 

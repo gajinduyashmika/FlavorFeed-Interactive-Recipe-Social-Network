@@ -157,6 +157,12 @@ const recipeSchema = new mongoose.Schema(
       type: String,
       default: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop&q=80',
     },
+    nutrition: {
+      calories: { type: Number, default: 0 },
+      protein: { type: Number, default: 0 },
+      carbs: { type: Number, default: 0 },
+      fat: { type: Number, default: 0 },
+    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

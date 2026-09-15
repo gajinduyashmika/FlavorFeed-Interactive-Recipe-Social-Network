@@ -152,7 +152,16 @@ export const createRecipe = async (req, res, next) => {
       ingredients,
       instructions,
       imageUrl,
+      nutrition,
     } = req.body;
+
+    if (typeof nutrition === 'string') {
+      try {
+        nutrition = JSON.parse(nutrition);
+      } catch {
+        nutrition = { calories: 0, protein: 0, carbs: 0, fat: 0 };
+      }
+    }
 
     // Parse ingredients if sent as string (e.g. from FormData)
     if (typeof ingredients === 'string') {
@@ -192,6 +201,7 @@ export const createRecipe = async (req, res, next) => {
       ingredients: ingredients || [],
       instructions: instructions || [],
       imageUrl: imageUrl || undefined,
+      nutrition: nutrition || { calories: 0, protein: 0, carbs: 0, fat: 0 },
       author: req.user._id,
     });
 
@@ -232,7 +242,16 @@ export const updateRecipe = async (req, res, next) => {
       ingredients,
       instructions,
       imageUrl,
+      nutrition,
     } = req.body;
+
+    if (nutrition && typeof nutrition === 'string') {
+      try {
+        nutrition = JSON.parse(nutrition);
+      } catch {
+        // ignore
+      }
+    }
 
     if (ingredients && typeof ingredients === 'string') {
       ingredients = JSON.parse(ingredients);
@@ -260,6 +279,7 @@ export const updateRecipe = async (req, res, next) => {
     if (ingredients) updateData.ingredients = ingredients;
     if (instructions) updateData.instructions = instructions;
     if (imageUrl) updateData.imageUrl = imageUrl;
+    if (nutrition) updateData.nutrition = nutrition;
 
     recipe = await Recipe.findByIdAndUpdate(req.params.id, updateData, {
       new: true,
